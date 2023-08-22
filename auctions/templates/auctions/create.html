@@ -1,0 +1,40 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+  Create Listing
+{% endblock %}
+
+{% block body %}
+
+  <h2>Create Listing</h2>
+  <form>
+    <div>
+      <div>
+        <span>Title</span>
+        <input
+          autocomplete="off"
+          type="text"
+          name="title"
+          placeholder="Air Jordan"
+        />
+      </div>
+      <div>
+        <span>Description</span>
+        <textarea
+          name="description"
+          placeholder="Iconic shoes designed for making history"
+        ></textarea>
+      </div>
+      <div>
+        <span>Starting bid</span>
+        <input
+          autocomplete="off"
+          type="number"
+          name="starting_bid"
+          placeholder="100"
+          />
+      </div>
+        <button type="submit" class="add-entry">Submit</button>
+    </div>
+  </form>
+{% endblock %}
