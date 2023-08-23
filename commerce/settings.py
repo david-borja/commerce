@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+TAILWIND_APP_NAME = 'theme' # tailwind css compatible django app
+
 INSTALLED_APPS = [
     'auctions',
     'django.contrib.admin',
@@ -39,6 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'tailwind',
+    TAILWIND_APP_NAME,
+    'django_browser_reload'
 ]
 
 MIDDLEWARE = [
@@ -49,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django_browser_reload.middleware.BrowserReloadMiddleware"
 ]
 
 ROOT_URLCONF = 'commerce.urls'
@@ -71,6 +77,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'commerce.wsgi.application'
 
+INTERNAL_IPS = [
+    '127.0.0.1'
+]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
