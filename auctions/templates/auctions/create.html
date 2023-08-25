@@ -5,36 +5,46 @@
 {% endblock %}
 
 {% block body %}
-
-  <h2>Create Listing</h2>
-  <form>
-    <div>
-      <div>
-        <span>Title</span>
-        <input
-          autocomplete="off"
-          type="text"
-          name="title"
-          placeholder="Air Jordan"
-        />
-      </div>
-      <div>
-        <span>Description</span>
-        <textarea
-          name="description"
-          placeholder="Iconic shoes designed for making history"
-        ></textarea>
-      </div>
-      <div>
-        <span>Starting bid</span>
-        <input
-          autocomplete="off"
-          type="number"
-          name="starting_bid"
-          placeholder="100"
-          />
-      </div>
-        <button type="submit" class="add-entry">Submit</button>
+<h2 class="text-xl">Create Listing</h2>
+<form class="flex flex-col items-start p-4 border-2 border-rose-500">
+  <!-- Title -->
+  <div class="flex justify-between w-full border-2 border-green-800">
+    <div class="flex items-center border-2 border-pink-700">
+      <p>Title</p>
     </div>
-  </form>
+    <input
+      class="w-1/2 max-w-xs rounded-sm"
+      autocomplete="off"
+      type="text"
+      name="title"
+      placeholder="Air Jordan"
+    />
+  </div>
+  <!-- Description -->
+  <div class="flex justify-between w-full border-2 border-green-800">
+    <div class="flex items-center border-2 border-pink-700">
+      <p>Description</p>
+    </div>
+    <textarea
+      class="w-1/2 max-w-xs rounded-sm"
+      name="description"
+      placeholder="Iconic shoes designed for making history"
+    ></textarea>
+  </div>
+  <!-- Starting bid -->
+  <div class="flex justify-between w-full border-2 border-green-800">
+    <div class="flex items-center border-2 border-pink-700">
+      <p>Starting bid</p>
+    </div>
+    <input
+      class="w-1/2 max-w-xs rounded-sm"
+      autocomplete="off"
+      type="number"
+      name="starting_bid"
+      placeholder="100"
+    />
+  </div>
+  <!-- Submit -->
+  <button type="submit" class="add-entry">Submit</button>
+</form>
 {% endblock %}
