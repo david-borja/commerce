@@ -20,17 +20,18 @@
     </script>
   </head>
   <body class="p-3 dark:bg-gray-900">
+    <!-- NAVBAR -->
     {% include 'auctions/components/navbar.html' %}
-    <h1 class="text-5xl">Auctions</h1>
-    <div>
+    <!-- <h1 class="text-5xl">Auctions</h1> -->
+    <!-- <div>
       {% if user.is_authenticated %}
         Signed in as
       <strong>{{ user.username }}</strong>.
       {% else %}
         Not signed in.
       {% endif %}
-    </div>
-    <ul class="m-3 flex gap-4">
+    </div> -->
+    <!-- <ul class="m-3 flex gap-4">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'index' %}">Active Listings</a>
       </li>
@@ -49,11 +50,11 @@
         <a class="nav-link" href="{% url 'register' %}">Register</a>
       </li>
       {% endif %}
-    </ul>
-    <hr />
+    </ul> -->
+    <!-- <hr /> -->
     {% block body %} {% endblock %}
     <!-- DARK MODE SCRIPT -->
-    <script>
+    <script defer>
       var themeToggleDarkIcon = document.getElementById(
         'theme-toggle-dark-icon'
       )
@@ -102,24 +103,38 @@
         }
       })
     </script>
-    <!-- NAVBAR SCRIPT -->
     <script defer>
-      const $targetEl = document.getElementById('navbar-default')
-      const $triggerEl = document.getElementById('triggerEl')
+      const $triggerElNavbar = document.getElementById('navbar-button')
+      const $targetElNavbar = document.getElementById('navbar-default')
 
-      function toggleHamburguerMenu(isExpandedStr) {
-        if (isExpandedStr === 'true') {
-          $triggerEl.setAttribute('aria-expanded', 'false')
-          $targetEl.classList.add('hidden')
-        } else {
-          $triggerEl.setAttribute('aria-expanded', 'true')
-          $targetEl.classList.remove('hidden')
-        }
+      const $triggerElAvatar = document.getElementById('avatar-button')
+      const $targetElAvatar = document.getElementById('user-dropdown')
+
+      function handleToggle(triggerEl, targetEl) {
+        triggerEl.addEventListener('click', () => {
+          const isExpandedStr = triggerEl.getAttribute('aria-expanded')
+          if (isExpandedStr === 'true') {
+            triggerEl.setAttribute('aria-expanded', 'false')
+            targetEl.classList.add('hidden')
+          } else {
+            triggerEl.setAttribute('aria-expanded', 'true')
+            targetEl.classList.remove('hidden')
+          }
+        })
+
+        window.addEventListener('click', (event) => {
+          if (!targetEl.contains(event.target) && !triggerEl.contains(event.target)) {
+            const isExpandedStr = triggerEl.getAttribute('aria-expanded')
+            if (isExpandedStr === 'true') {
+              triggerEl.setAttribute('aria-expanded', 'false')
+              targetEl.classList.add('hidden')
+            }
+          }
+        });
       }
-      $triggerEl.addEventListener('click', () => {
-        const isExpandedStr = $triggerEl.getAttribute('aria-expanded')
-        toggleHamburguerMenu(isExpandedStr)
-      })
+
+      handleToggle($triggerElNavbar, $targetElNavbar)
+      handleToggle($triggerElAvatar, $targetElAvatar)
     </script>
   </body>
 </html>
