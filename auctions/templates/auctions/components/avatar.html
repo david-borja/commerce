@@ -4,8 +4,8 @@
     type="button"
     data-dropdown-toggle="user-dropdown"
     data-dropdown-placement="bottom-start"
-    class="w-10 h-10 rounded-full cursor-pointer"
-    src="https://i.insider.com/5ece9322f34d050a92546892?width=700&format=jpeg&auto=webp"
+    class="w-10 h-10 rounded-full cursor-pointer object-cover"
+    src="https://i.stack.imgur.com/l60Hf.png"
     alt="User dropdown"
     aria-expanded="false"
   />
@@ -15,7 +15,7 @@
     class="absolute right-4 hidden z-10 mt-3 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
   >
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-      <div>Harry Potter</div>
+      <div>{{ request.user.username }}</div>
     </div>
     <ul
       class="py-2 text-sm text-gray-700 dark:text-gray-200"
