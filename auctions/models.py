@@ -10,9 +10,9 @@ class Listing(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=128)
     starting_bid = models.FloatField()
-    price = models.FloatField()
-    image = models.CharField(max_length=128)
-    category = models.CharField(max_length=64)
+    highest_bid_id = models.ForeignKey("Bid", blank=True, default=None, on_delete=models.CASCADE,  related_name="lisitings_won") # string references ( "Bid" ) can be use for referencing models that are defined below
+    image = models.CharField(max_length=128, blank=True)
+    category = models.CharField(max_length=64, blank=True)
     is_active = models.BooleanField(default=True)
     saved_by = models.ManyToManyField(User, blank=True, related_name="watchlist")
     winner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="won_auctions")
@@ -22,8 +22,8 @@ class Listing(models.Model):
     def _str_(self):
         return f"{self.id}: {self.title}, last price {self.price}"
 
-# Bids
-class Bids(models.Model):
+# Bid
+class Bid(models.Model):
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="listing_bids")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_bids")
     price = models.FloatField()
