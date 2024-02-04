@@ -10,6 +10,15 @@ def custom_input(name, type, placeholder, label):
         'label': label
     }
 
+@register.inclusion_tag('auctions/components/optional-input-group.html')
+def custom_optional_input(name, type, placeholder, label):
+    return {
+        'name': name,
+        'type': type,
+        'placeholder': placeholder,
+        'label': label
+    }
+
 @register.inclusion_tag('auctions/components/error-input-group.html')
 def custom_error_input(name, type, placeholder, label):
     return {

@@ -1,7 +1,9 @@
-{% extends "auctions/layout.html" %} {% block body %} {% load custom_tags %}
+{% extends "auctions/layout.html" %}
+{% block body %}
+{% load custom_tags %}
 
 <h2 class="text-xl">Create Listing</h2>
-<form action="{% url 'create' %}" method="post" class="my-6 max-w-md mx-auto">
+<form action="{% url 'create' %}" method="post" class="max-w-md mx-auto my-6">
   {% csrf_token %}
   <div class="mb-6">
     {% custom_input 'title' 'text' 'Title' 'Product title' %}
