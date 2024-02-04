@@ -1,6 +1,12 @@
-[] Models: Your application should have at least three models in addition to the User model: one for auction listings, one for bids, and one for comments made on auction listings. It’s up to you to decide what fields each model should have, and what the types of those fields should be. You may have additional models if you would like.
+[x] Models: Your application should have at least three models in addition to the User model: one for auction listings, one for bids, and one for comments made on auction listings. It’s up to you to decide what fields each model should have, and what the types of those fields should be. You may have additional models if you would like.
 
-[] Create Listing: Users should be able to visit a page to create a new listing. They should be able to specify a title for the listing, a text-based description, and what the starting bid should be. Users should also optionally be able to provide a URL for an image for the listing and/or a category (e.g. Fashion, Toys, Electronics, Home, etc.).
+[x] Create Listing: Users should be able to visit a page to create a new listing. 
+They should be able to specify a
+  title for the listing
+  a text-based description
+  and what the starting bid should be.
+  Users should also optionally be able to provide a URL for an image for the listing and/or
+  a category (e.g. Fashion, Toys, Electronics, Home, etc.).
 
 [] Active Listings Page: The default route of your web application should let users view all of the currently active auction listings. For each active listing, this page should display (at minimum) the title, description, current price, and photo (if one exists for the listing).
 

@@ -17,5 +17,11 @@ python3 manage.py makemigrations
 Migrate changes to database
 python3 manage.py migrate
 
+Create Django Admin
+python3 manage.py createsuperuser
+
 Tailwind config
 https://pypi.org/project/django-tailwind/
+
+To start Django Tailwind in development mode, run the following command in a terminal:
+python3 manage.py tailwind start
