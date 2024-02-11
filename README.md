@@ -17,6 +17,12 @@ python3 manage.py makemigrations
 Migrate changes to database
 python3 manage.py migrate
 
+Remove all data from the database
+python3 manage.py flush
+
+Seed database with development data
+python3 manage.py seed_db
+
 Create Django Admin
 python3 manage.py createsuperuser
 
