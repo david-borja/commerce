@@ -1,0 +1,48 @@
+[
+  {
+    "username": "Iron Man",
+    "email": "ironman@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Thanos",
+    "email": "thanos@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Spider-Man",
+    "email": "spiderman@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Thor",
+    "email": "thor@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Captain America",
+    "email": "captainamerica@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Black Widow",
+    "email": "blackwidow@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "Hawkeye",
+    "email": "hawkeye@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "The Hulk",
+    "email": "thehulk@example.com",
+    "password": "1234"
+  },
+  {
+    "username": "david",
+    "email": "david@example.com",
+    "password": "1234",
+    "is_superuser": true
+  }
+]
