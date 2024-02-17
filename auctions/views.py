@@ -8,7 +8,15 @@ from .models import User, Listing
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = (
+        Listing.objects.all()
+    )  # it returns a queryset containing all the objects (instances) of the Listing model
+
+    for listing in listings:
+        # Django model instances are not dictionary-like objects. They are instances of Python classes representing database records,
+        # and their attributes are accessed using attribute access syntax (dot notation).
+        print(listing.title)
+    return render(request, "auctions/index.html", {"listings": listings})
 
 
 def login_view(request):

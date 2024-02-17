@@ -17,11 +17,13 @@ def insert_listings(self, data):
             title = item["title"]
             description = item["description"]
             starting_bid = item["starting_bid"]
+            image_url = item["image_url"]
             author = User.objects.get_by_natural_key(item["author"])
             listing = Listing(
                 title=title,
                 description=description,
                 starting_bid=starting_bid,
+                image_url=image_url,
                 author=author,
             )
             listing.save()
