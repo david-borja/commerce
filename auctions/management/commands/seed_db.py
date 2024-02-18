@@ -36,19 +36,22 @@ def insert_listings(self, data):
 def insert_users(self, data):
     try:
         for item in data:
-            username = item["username"]
-            email = item["email"]
-            password = item["password"]
-            is_superuser = item.get(
-                "is_superuser", False
-            )  # second argument is the fallback value
-            if is_superuser:
-                User.objects.create_superuser(username, email, password)
+            kwargs = {
+                "username": item["username"],
+                "email": item["email"],
+                "password": item["password"],
+                "profile_pic": item["profile_pic"],
+                "is_superuser": item.get(
+                    "is_superuser", False
+                ),  # second argument is the fallback value
+            }
+            if kwargs["is_superuser"]:
+                User.objects.create_superuser(**kwargs)
                 self.stdout.write(
                     self.style.SUCCESS(f"Created superuser: '{item['username']}'")
                 )
             else:
-                User.objects.create_user(username, email, password)
+                User.objects.create_user(**kwargs)
                 self.stdout.write(
                     self.style.SUCCESS(f"Created user '{item['username']}'")
                 )

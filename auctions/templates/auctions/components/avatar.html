@@ -4,15 +4,15 @@
     type="button"
     data-dropdown-toggle="user-dropdown"
     data-dropdown-placement="bottom-start"
-    class="w-10 h-10 rounded-full cursor-pointer object-cover"
-    src="https://i.stack.imgur.com/l60Hf.png"
-    alt="User dropdown"
+    class="object-cover w-10 h-10 rounded-full cursor-pointer"
+    src="{{ request.user.profile_pic|default:'https://i.stack.imgur.com/l60Hf.png' }}"
+    alt="User Profile Picture"
     aria-expanded="false"
   />
   <!-- Dropdown menu -->
   <div
     id="user-dropdown"
-    class="absolute right-4 hidden z-10 mt-3 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+    class="absolute z-10 hidden mt-3 bg-white divide-y divide-gray-100 rounded-lg shadow right-4 w-44 dark:bg-gray-700 dark:divide-gray-600"
   >
     <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
       <div>{{ request.user.username }}</div>

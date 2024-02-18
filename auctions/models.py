@@ -5,7 +5,20 @@ import uuid
 
 # User
 class User(AbstractUser):
-    pass
+    profile_pic = models.CharField(max_length=128, blank=True)
+
+    @staticmethod
+    def get_profile_pic_by_username(usernames):
+        # Query the database for users with the given usernames
+        users = User.objects.filter(username__in=usernames)
+        # Create a dictionary to store profile pics
+        profile_pics = {}
+        # Iterate over the filtered users
+        for user in users:
+            # Add the username and profile pic URL to the dictionary
+            profile_pics[user.username] = user.profile_pic
+
+        return profile_pics
 
 
 # Listing
@@ -39,8 +52,8 @@ class Listing(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def _str_(self):
-        return f"{self.id}: {self.title}, last price {self.price}"
+    def __str__(self):
+        return f"Title: {self.title}, author: {self.author.username}"
 
 
 # Bid

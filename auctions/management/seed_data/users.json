@@ -2,46 +2,55 @@
   {
     "username": "Iron Man",
     "email": "ironman@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy9Apq8dclTILdYj1iVclDLl8fbPd1QianPg&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "Thanos",
     "email": "thanos@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQx1GM8yog5jZxct88IU17N0BIfYnikPwx4g&usqp=CAU",
     "password": "1234"
   },
   {
-    "username": "Spider-Man",
+    "username": "Spider Man",
     "email": "spiderman@example.com",
+    "profile_pic": "https://hips.hearstapps.com/hmg-prod/images/spiderman-tom-holland-1544695828.jpg?crop=0.525xw:1.00xh;0.238xw,0&resize=1200:*",
     "password": "1234"
   },
   {
     "username": "Thor",
     "email": "thor@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6XBujOMaQh8eqHzw2manv40x2YbkBqMTm_Q&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "Captain America",
     "email": "captainamerica@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQn22Z9n2vUxeZQT5bny5c1mcT_WiKZPraI7g&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "Black Widow",
     "email": "blackwidow@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVip25PPnilnORszHWR-27l8ngrdoPzVnGnA&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "Hawkeye",
     "email": "hawkeye@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV0B3GWu2GEsk1awtp5RNon4xCpmqwwjt8Bw&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "The Hulk",
     "email": "thehulk@example.com",
+    "profile_pic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiVVpJWyBA-tdUT7Vxvh97xuf7mi994L4CVQ&usqp=CAU",
     "password": "1234"
   },
   {
     "username": "david",
     "email": "david@example.com",
+    "profile_pic": "",
     "password": "1234",
     "is_superuser": true
   }

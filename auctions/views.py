@@ -11,11 +11,16 @@ def index(request):
     listings = (
         Listing.objects.all()
     )  # it returns a queryset containing all the objects (instances) of the Listing model
-
+    authors = []
     for listing in listings:
         # Django model instances are not dictionary-like objects. They are instances of Python classes representing database records,
         # and their attributes are accessed using attribute access syntax (dot notation).
-        print(listing.title)
+        authors.append(listing.author)
+    profile_pics = User.get_profile_pic_by_username(authors)
+
+    for listing in listings:
+        listing.author_profile_pic = profile_pics[listing.author.username]
+
     return render(request, "auctions/index.html", {"listings": listings})
 
 
