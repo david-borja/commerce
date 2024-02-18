@@ -7,19 +7,6 @@ import uuid
 class User(AbstractUser):
     profile_pic = models.CharField(max_length=128, blank=True)
 
-    @staticmethod
-    def get_profile_pic_by_username(usernames):
-        # Query the database for users with the given usernames
-        users = User.objects.filter(username__in=usernames)
-        # Create a dictionary to store profile pics
-        profile_pics = {}
-        # Iterate over the filtered users
-        for user in users:
-            # Add the username and profile pic URL to the dictionary
-            profile_pics[user.username] = user.profile_pic
-
-        return profile_pics
-
 
 # Listing
 class Listing(models.Model):
