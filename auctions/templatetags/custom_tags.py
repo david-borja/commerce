@@ -1,4 +1,6 @@
 from django import template
+import locale
+locale.setlocale(locale.LC_ALL, '')
 register = template.Library()
 
 @register.inclusion_tag('auctions/components/input-group.html')
@@ -33,3 +35,7 @@ def custom_submit_button(text):
     return {
         'text': text,
     }
+
+@register.filter()
+def currency(value):
+    return locale.currency(value, grouping=True)
