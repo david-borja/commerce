@@ -12,7 +12,21 @@ def index(request):
         Listing.objects.all()
     )  # it returns a queryset containing all the objects (instances) of the Listing model
 
+    # here it should also check if a user is logged in.
+    # in that case, exclude listings published by them
+
     return render(request, "auctions/index.html", {"listings": listings})
+
+
+def detail(request, listing_id):
+    if request.user.is_authenticated:
+        listing = Listing.objects.get(pk=listing_id)
+        # Instance of the Listing model -> dot notation
+        is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
+        listing.is_saved_by_user = is_saved_by_user
+        return render(request, "auctions/detail.html", {"listing": listing})
+    else:
+        return render(request, "auctions/login.html")
 
 
 def login_view(request):

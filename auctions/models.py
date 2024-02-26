@@ -40,7 +40,7 @@ class Listing(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Title: {self.title}, author: {self.author.username}"
+        return f"Title: {self.title}, author: {self.author.username}, is_saved_by_user: {self.is_saved_by_user}"
 
 
 # Bid
