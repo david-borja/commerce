@@ -20,9 +20,17 @@ def index(request):
 
 def detail(request, listing_id):
     if request.user.is_authenticated:
-        listing = Listing.objects.get(pk=listing_id)
         # Instance of the Listing model -> dot notation
+        listing = Listing.objects.get(pk=listing_id)
+        user_watchlist = request.user.watchlist.all()  # .all() very important!
         is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
+        if request.method == "POST" and request.POST.get("_method") == "PATCH":
+            if is_saved_by_user:
+                listing.saved_by.remove(request.user)
+                is_saved_by_user = False
+            else:
+                listing.saved_by.add(request.user)
+                is_saved_by_user = True
         listing.is_saved_by_user = is_saved_by_user
         return render(request, "auctions/detail.html", {"listing": listing})
     else:
