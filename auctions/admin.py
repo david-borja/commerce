@@ -1,5 +1,5 @@
+from django import forms
 from django.contrib import admin
-
 from .models import Bid, Listing, User, Comments, Categories
 
 
@@ -11,21 +11,51 @@ class ListingAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "title",
-        "description",
+        "author",
         "starting_bid",
         "highest_bid_id",
-        "image_url",
         "category",
         "is_active",
         "winner",
-        "author",
-        "created_at",
     )
     filter_horizontal = ("saved_by",)
 
 
+class UserAdminForm(forms.ModelForm):
+    watchlist = forms.ModelMultipleChoiceField(
+        queryset=Listing.objects.all(),
+        required=False,
+        widget=admin.widgets.FilteredSelectMultiple(
+            verbose_name=("Watchlist"), is_stacked=False
+        ),
+    )
+
+    class Meta:
+        model = Listing
+        fields = "__all__"
+
+    def __init__(self, *args, **kwargs):
+        super(UserAdminForm, self).__init__(*args, **kwargs)
+
+        if self.instance and self.instance.pk:
+            self.fields["watchlist"].initial = self.instance.watchlist.all()
+
+    def save(self, commit=True):
+        user = super(UserAdminForm, self).save(commit=False)
+
+        if commit:
+            user.save()
+
+        if user.pk:
+            user.watchlist.set(self.cleaned_data["watchlist"])
+
+        return user
+
+
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("username", "email", "password", "profile_pic")
+    form = UserAdminForm
+    list_display = ("username", "email")
+    filter_horizontal = ("watchlist",)
 
 
 class CommentsAdmin(admin.ModelAdmin):
