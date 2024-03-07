@@ -8,12 +8,12 @@ from .models import User, Listing
 
 
 def index(request):
-    listings = (
-        Listing.objects.all()
-    )  # it returns a queryset containing all the objects (instances) of the Listing model
-
-    # here it should also check if a user is logged in.
-    # in that case, exclude listings published by them
+    if request.user.is_authenticated:
+        listings = Listing.objects.exclude(author=request.user)
+    else:
+        listings = (
+            Listing.objects.all()
+        )  # it returns a queryset containing all the objects (instances) of the Listing model
 
     return render(request, "auctions/index.html", {"listings": listings})
 
