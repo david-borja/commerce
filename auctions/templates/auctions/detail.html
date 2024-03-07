@@ -3,26 +3,9 @@
   <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
     {{ listing.title }}
   </h2>
-  <!-- HTML forms don't support PATCH methods natively. Just GET or POST -->
-  <form
-    id="patchDetailForm"
-    method="POST"
-    action="{% url 'detail' listing.id %}"
-  >
-    {% csrf_token %}
-    <!-- HTTP method can be specified using a hidden input -->
-    <input type="hidden" name="_method" value="PATCH" />
-    <button
-      type="submit"
-      class="p-1.5 ml-auto text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
-    >
-      {% if listing.is_saved_by_user %}
-        {% svg_icon 'bookmark-solid' %}
-      {% else %} 
-        {% svg_icon 'bookmark' %}
-      {% endif %}
-    </button>
-  </form>
+  {% if is_authenticated %}
+    {% bookmark_button listing.is_saved_by_user listing.id %}
+  {% endif %}
 </div>
 <article class="mx-auto my-6">
   <div class="flex gap-4 mb-6">

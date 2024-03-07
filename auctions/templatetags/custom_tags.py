@@ -31,6 +31,12 @@ def custom_submit_button(text):
         "text": text,
     }
 
+@register.inclusion_tag("auctions/components/bookmark-button.html")
+def bookmark_button(is_active, id):
+    return {
+        "is_active": is_active,
+        "id": id,
+    }
 
 @register.simple_tag
 def svg_icon(file_name):
