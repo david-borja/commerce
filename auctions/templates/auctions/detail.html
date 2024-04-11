@@ -18,9 +18,19 @@
       <h3>Highest bid</h3>
       <span class="text-2xl font-bold tracking-tight">
         <!-- here it should display starting_bid only if there are no bids -->
-        {{ listing.starting_bid|currency }}
+        {{ listing.current_highest|currency }}
       </span>
     </header>
+    {% if is_authenticated %}
+      <form action="{% url 'detail' listing.id %}" method="POST" class="max-w-md mx-auto my-6">
+        {% csrf_token %}
+        <input type="hidden" name="_method" value="PATCH" />
+        <div class="mb-6">
+          {% custom_input 'bid' 'number' '3500' 'Place your Bid' %}
+        </div>
+        {% custom_submit_button 'Submit' %}
+      </form>
+    {% endif %}
   </div>
   <div class="flex items-start justify-between">
     <p
