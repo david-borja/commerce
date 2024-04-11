@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listing
+from .models import User, Listing, Bid
 
 
 def index(request):
@@ -26,6 +26,18 @@ def detail(request, listing_id):
     if is_authenticated:
         is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
         if request.method == "POST" and request.POST.get("_method") == "PATCH":
+            submitted_bid = float(request.POST.get("bid"))
+            if submitted_bid:
+                highest_bid = listing.highest_bid.price if listing.highest_bid else listing.starting_bid
+                is_new_highest = submitted_bid > highest_bid
+                if is_new_highest:
+                    bid = Bid.objects.create(
+                        listing=listing,
+                        user=request.user,
+                        price=submitted_bid,
+                    )
+                    listing.highest_bid = bid
+                    listing.save()
             if is_saved_by_user:
                 listing.saved_by.remove(request.user)
                 is_saved_by_user = False
@@ -33,6 +45,7 @@ def detail(request, listing_id):
                 listing.saved_by.add(request.user)
                 is_saved_by_user = True
         listing.is_saved_by_user = is_saved_by_user
+    listing.current_highest = listing.highest_bid.price if listing.highest_bid else listing.starting_bid
     params = { "listing": listing, "is_authenticated": is_authenticated }
     return render(request, "auctions/detail.html", params)
 
@@ -107,8 +120,8 @@ def create(request):
             )
             listing.save()
 
-            return render(request, "auctions/index.html")
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/create.html")
     else:
-        return render(request, "auctions/login.html")
+        return HttpResponseRedirect(reverse("login"))
