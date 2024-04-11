@@ -14,7 +14,7 @@ class Listing(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=256)
     starting_bid = models.FloatField()
-    highest_bid_id = models.ForeignKey(
+    highest_bid = models.ForeignKey(
         "Bid",
         blank=True,
         null=True,
