@@ -4,7 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listing, Bid
+from .models import User, Listing
+from .utils import process_bid
 
 
 def index(request):
@@ -17,7 +18,6 @@ def index(request):
 
     return render(request, "auctions/index.html", {"listings": listings})
 
-
 def detail(request, listing_id):
     is_authenticated = request.user.is_authenticated
     # Instance of the Listing model -> dot notation
@@ -26,18 +26,9 @@ def detail(request, listing_id):
     if is_authenticated:
         is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
         if request.method == "POST" and request.POST.get("_method") == "PATCH":
-            submitted_bid = float(request.POST.get("bid"))
+            submitted_bid = request.POST.get("bid")
             if submitted_bid:
-                highest_bid = listing.highest_bid.price if listing.highest_bid else listing.starting_bid
-                is_new_highest = submitted_bid > highest_bid
-                if is_new_highest:
-                    bid = Bid.objects.create(
-                        listing=listing,
-                        user=request.user,
-                        price=submitted_bid,
-                    )
-                    listing.highest_bid = bid
-                    listing.save()
+                process_bid(submitted_bid, listing, request)
             if is_saved_by_user:
                 listing.saved_by.remove(request.user)
                 is_saved_by_user = False
