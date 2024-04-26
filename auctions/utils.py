@@ -14,3 +14,5 @@ def process_bid(bid, listing, request):
         )
         listing.highest_bid = bid
         listing.save()
+    else:
+        return "Bid is not higher than current highest bid."

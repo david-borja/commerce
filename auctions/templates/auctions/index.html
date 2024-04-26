@@ -1,4 +1,6 @@
-{% extends "auctions/layout.html" %} {% block body %} {% load custom_tags %}
+{% extends "auctions/layout.html" %}
+{% block body %}
+{% load custom_tags %}
 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
   Active Listings
 </h2>
@@ -25,7 +27,7 @@
             class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
           >
             <!-- here it should display starting_bid only if there are no bids -->
-            {{ listing.starting_bid|currency }}
+            {{ listing.current_highest|currency }}
           </h3>
           <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
             {{ listing.description }}

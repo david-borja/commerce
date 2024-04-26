@@ -9,13 +9,14 @@ from .utils import process_bid
 
 
 def index(request):
-    if request.user.is_authenticated:
-        listings = Listing.objects.exclude(author=request.user)
-    else:
-        listings = (
-            Listing.objects.all()
-        )  # it returns a queryset containing all the objects (instances) of the Listing model
+    listings = (
+        Listing.objects.all()
+    )  # it returns a queryset containing all the objects (instances) of the Listing model
 
+    for listing in listings:
+        listing.current_highest = (
+            listing.highest_bid.price if listing.highest_bid else listing.starting_bid
+        )
     return render(request, "auctions/index.html", {"listings": listings})
 
 def detail(request, listing_id):
@@ -23,12 +24,13 @@ def detail(request, listing_id):
     # Instance of the Listing model -> dot notation
     listing = Listing.objects.get(pk=listing_id)
     # user_watchlist = request.user.watchlist.all()  # .all() very important!
+    error = None
     if is_authenticated:
         is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
         if request.method == "POST" and request.POST.get("_method") == "PATCH":
             submitted_bid = request.POST.get("bid")
             if submitted_bid:
-                process_bid(submitted_bid, listing, request)
+                error = process_bid(submitted_bid, listing, request)
             if is_saved_by_user:
                 listing.saved_by.remove(request.user)
                 is_saved_by_user = False
@@ -38,6 +40,8 @@ def detail(request, listing_id):
         listing.is_saved_by_user = is_saved_by_user
     listing.current_highest = listing.highest_bid.price if listing.highest_bid else listing.starting_bid
     params = { "listing": listing, "is_authenticated": is_authenticated }
+    if error:
+        params["message"] = error
     return render(request, "auctions/detail.html", params)
 
 

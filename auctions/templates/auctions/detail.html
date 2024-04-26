@@ -7,6 +7,9 @@
     {% bookmark_button listing.is_saved_by_user listing.id %}
   {% endif %}
 </div>
+  {% if message %}
+    <div class="text-sm font-semibold text-right text-red-600">{{ message }}</div>
+  {% endif %}
 <article class="mx-auto my-6">
   <div class="flex gap-4 mb-6">
     <img
@@ -17,7 +20,6 @@
     <header class="text-gray-900 dark:text-white">
       <h3>Highest bid</h3>
       <span class="text-2xl font-bold tracking-tight">
-        <!-- here it should display starting_bid only if there are no bids -->
         {{ listing.current_highest|currency }}
       </span>
     </header>
@@ -26,7 +28,11 @@
         {% csrf_token %}
         <input type="hidden" name="_method" value="PATCH" />
         <div class="mb-6">
-          {% custom_input 'bid' 'number' '3500' 'Place your Bid' %}
+          {% if message %}
+            {% custom_error_input 'bid' 'number' '3500' 'Place your Bid' %}
+          {% else %}
+            {% custom_input 'bid' 'number' '3500' 'Place your Bid' %}
+          {% endif %}
         </div>
         {% custom_submit_button 'Submit' %}
       </form>
