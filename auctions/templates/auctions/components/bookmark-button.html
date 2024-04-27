@@ -1,16 +1,17 @@
 {% load custom_tags %}
 <!-- HTML forms don't support PATCH methods natively. Just GET or POST -->
 <form
-  id="patchDetailForm"
+  id="bookmarkForm"
   method="POST"
   action="{% url 'detail' id %}"
 >
   {% csrf_token %}
   <!-- HTTP method can be specified using a hidden input -->
   <input type="hidden" name="_method" value="PATCH" />
+  <input type="hidden" name="toggle_key" value="is_saved" />
   <button
     type="submit"
-    class="p-1.5 ml-auto text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
+    class="p-1.5 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700"
   >
     {% if is_active %}
       {% svg_icon 'bookmark-solid' %}
