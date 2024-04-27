@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Listing
-from .utils import process_bid
+from .utils import process_bid, toggle_bookmark, close_listing
 
 
 def index(request):
@@ -27,21 +27,19 @@ def detail(request, listing_id):
     error = None
     if is_authenticated:
         is_saved_by_user = request.user.watchlist.filter(pk=listing_id).exists()
+        listing.is_saved_by_user = is_saved_by_user
         if request.method == "POST" and request.POST.get("_method") == "PATCH":
+            toggle_key = request.POST.get("toggle_key")
             submitted_bid = request.POST.get("bid")
+            if toggle_key:
+                listing.is_active = close_listing(listing) if toggle_key == "is_active" else listing.is_active
+                listing.is_saved_by_user = toggle_bookmark(is_saved_by_user, listing, request.user) if toggle_key == "is_saved" else is_saved_by_user
+                return HttpResponseRedirect(reverse("detail", args=[listing_id]))
             if submitted_bid:
                 error = process_bid(submitted_bid, listing, request)
-            if is_saved_by_user:
-                listing.saved_by.remove(request.user)
-                is_saved_by_user = False
-            else:
-                listing.saved_by.add(request.user)
-                is_saved_by_user = True
-        listing.is_saved_by_user = is_saved_by_user
-    listing.current_highest = listing.highest_bid.price if listing.highest_bid else listing.starting_bid
-    params = { "listing": listing, "is_authenticated": is_authenticated }
-    if error:
-        params["message"] = error
+                if not error:
+                    return HttpResponseRedirect(reverse("detail", args=[listing_id]))
+    params = { "listing": listing, "is_authenticated": is_authenticated, "message": error }
     return render(request, "auctions/detail.html", params)
 
 
