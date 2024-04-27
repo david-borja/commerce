@@ -9,6 +9,9 @@ import os
 locale.setlocale(locale.LC_ALL, "")
 register = template.Library()
 
+@register.inclusion_tag("auctions/components/badge.html")
+def custom_badge(is_ok, text):
+    return {"is_ok": is_ok, "text": text}
 
 @register.inclusion_tag("auctions/components/input-group.html")
 def custom_input(name, type, placeholder, label):
