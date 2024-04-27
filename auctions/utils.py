@@ -16,3 +16,17 @@ def process_bid(bid, listing, request):
         listing.save()
     else:
         return "Bid is not higher than current highest bid."
+    
+def toggle_bookmark(is_saved_by_user, listing, user):
+    if is_saved_by_user:
+        listing.saved_by.remove(user)
+        return False
+    else:
+        listing.saved_by.add(user)
+        return True
+    
+def close_listing(listing):
+    if listing.is_active:
+        listing.is_active = False
+        listing.save()
+        return False
