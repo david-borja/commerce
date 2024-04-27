@@ -3,6 +3,11 @@
   <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
     {{ listing.title }}
   </h2>
+  {% if listing.is_active %}
+    {% custom_badge True 'Active'%}
+  {% else %}
+    {% custom_badge False 'Closed'%}
+  {% endif %}
   {% if is_authenticated %}
     {% bookmark_button listing.is_saved_by_user listing.id %}
   {% endif %}
@@ -18,12 +23,29 @@
       alt="{{ 'Image of listing article: '|add:listing.title }}"
     />
     <header class="text-gray-900 dark:text-white">
-      <h3>Highest bid</h3>
-      <span class="text-2xl font-bold tracking-tight">
-        {{ listing.current_highest|currency }}
-      </span>
+      {% if listing.highest_bid %}
+        <h3>Highest bid</h3>
+          <span class="text-2xl font-bold tracking-tight">
+            {{ listing.highest_bid.price|currency }}
+          </span>
+        <div class="flex items-center justify-end gap-2 mt-4">
+          <span class="text-gray-900 dark:text-white"
+          >Bid by {{ listing.highest_bid.user.username }}</span
+          >
+          <img
+          class="object-cover w-10 h-10 rounded-full"
+          src="{{ listing.highest_bid.user.profile_pic }}"
+          alt="Highest bidder's profile picture"
+          />
+        </div>
+        {% else %}
+          <h3>Initial price</h3>
+            <span class="text-2xl font-bold tracking-tight">
+              {{ listing.starting_bid|currency }}
+            </span>
+      {% endif %}
     </header>
-    {% if is_authenticated %}
+    {% if is_authenticated and listing.author != request.user %}
       <form action="{% url 'detail' listing.id %}" method="POST" class="max-w-md mx-auto my-6">
         {% csrf_token %}
         <input type="hidden" name="_method" value="PATCH" />
@@ -36,6 +58,26 @@
         </div>
         {% custom_submit_button 'Submit' %}
       </form>
+    {% elif is_authenticated and listing.author == request.user %}
+      <div class="text-sm font-semibold text-center text-gray-900 dark:text-white">
+        <span class="block mb-4">You published this listing</span>
+        {% if listing.is_active %}
+        <form
+          id="closeListingForm"
+          method="POST"
+          action="{% url 'detail' listing.id %}"
+        >
+          {% csrf_token %}
+          <input type="hidden" name="_method" value="PATCH" />
+          <input type="hidden" name="toggle_key" value="is_active" />
+          {% custom_submit_button 'Close' %}
+        </form>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="text-sm font-semibold text-center text-gray-900 dark:text-white">
+        You need to be logged in to place a bid
+      </div>
     {% endif %}
   </div>
   <div class="flex items-start justify-between">
