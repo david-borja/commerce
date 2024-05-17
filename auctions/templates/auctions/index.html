@@ -2,11 +2,11 @@
 {% block body %}
 {% load custom_tags %}
 <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
-  Active Listings
+  {{ title }}
 </h2>
 <ul class="flex flex-col items-center gap-6 mx-auto my-6">
   {% for listing in listings %}
-  <li>
+  <li class="w-full">
     <article>
       <a
         href="{% url 'detail' listing.id %}"
@@ -17,7 +17,7 @@
           src="{{ listing.image_url }}"
           alt="{{ 'Image of listing article: '|add:listing.title }}"
         />
-        <div class="flex flex-col justify-between p-4 leading-normal">
+        <div class="flex flex-col justify-between p-4 leading-normal w-full">
           <h3
             class="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white"
           >
