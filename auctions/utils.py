@@ -28,5 +28,7 @@ def toggle_bookmark(is_saved_by_user, listing, user):
 def close_listing(listing):
     if listing.is_active:
         listing.is_active = False
+        if listing.highest_bid:
+            listing.winner = listing.highest_bid.user
         listing.save()
         return False
