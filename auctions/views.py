@@ -9,15 +9,38 @@ from .utils import process_bid, toggle_bookmark, close_listing
 
 
 def index(request):
-    listings = (
-        Listing.objects.all()
-    )  # it returns a queryset containing all the objects (instances) of the Listing model
+    # it returns a queryset containing all the objects (instances) of the Listing model
+    listings = Listing.objects.filter(is_active=True)
 
     for listing in listings:
         listing.current_highest = (
             listing.highest_bid.price if listing.highest_bid else listing.starting_bid
         )
-    return render(request, "auctions/index.html", {"listings": listings})
+    return render(request, "auctions/index.html", {"listings": listings, "title": "Active Listings"})
+
+def watchlist(request):
+    is_authenticated = request.user.is_authenticated
+    if is_authenticated:
+        user_watchlist = request.user.watchlist.all()  # .all() very important!
+        for listing in user_watchlist:
+            listing.current_highest = (
+                listing.highest_bid.price if listing.highest_bid else listing.starting_bid
+            )
+        return render(request, "auctions/index.html", {"listings": user_watchlist, "title": "Watchlist"})
+    else:
+        return HttpResponseRedirect(reverse("login"))
+
+def won_auctions(request):
+    is_authenticated = request.user.is_authenticated
+    if is_authenticated:
+        won_auctions = request.user.won_auctions.all()
+        for listing in won_auctions:
+            listing.current_highest = (
+                listing.highest_bid.price if listing.highest_bid else listing.starting_bid
+            )
+        return render(request, "auctions/index.html", {"listings": won_auctions, "title": "Won Auctions"})
+    else:
+        return HttpResponseRedirect(reverse("login"))
 
 def detail(request, listing_id):
     is_authenticated = request.user.is_authenticated
