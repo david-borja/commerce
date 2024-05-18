@@ -32,3 +32,25 @@ def close_listing(listing):
             listing.winner = listing.highest_bid.user
         listing.save()
         return False
+    
+def get_current_highest(listing):
+    return listing.highest_bid.price if listing.highest_bid else listing.starting_bid
+
+def get_footer(listing, feed=""):
+    if feed == "published":
+        if listing.is_active and listing.highest_bid:
+            string =  f"Highest bid by {listing.highest_bid.user.username}"
+            pic = listing.highest_bid.user.profile_pic
+            alt = "Profile picture of the highest bidder"
+            return { "string": string, "pic": pic, "alt": alt }
+        if listing.is_active and not listing.highest_bid:
+            return { "string": "No bids yet", "pic": None, "alt": None }
+        if not listing.is_active and listing.highest_bid:
+            string = f"Won by {listing.winner.username}"
+            pic = listing.winner.profile_pic
+            alt = "Profile picture of the winner"
+            return { "string": string, "pic": pic, "alt": alt }
+        if not listing.is_active and not listing.highest_bid:
+            return { "string": "Closed with no bids", "pic": None, "alt": None }
+    else:
+        return { "string": f"Posted by {listing.author.username}", "pic": listing.author.profile_pic, "alt": "Profile picture of the author" }

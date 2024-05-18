@@ -34,13 +34,15 @@
           </p>
           <footer class="flex items-center justify-end gap-2">
             <span class="text-gray-900 dark:text-white"
-              >Posted by {{ listing.author }}</span
+              >{{ listing.footer.string }}</span
             >
+            {% if listing.footer.pic %}
             <img
               class="object-cover w-10 h-10 rounded-full"
-              src="{{ listing.author.profile_pic }}"
-              alt="Listing's author profile picture"
+              src="{{ listing.footer.pic }}"
+              alt="{{ listing.footer.alt }}"
             />
+            {% endif %}
           </footer>
         </div>
       </a>

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from .models import User, Listing
-from .utils import process_bid, toggle_bookmark, close_listing
+from .utils import process_bid, toggle_bookmark, close_listing, get_current_highest, get_footer
 
 
 def index(request):
@@ -13,9 +13,8 @@ def index(request):
     listings = Listing.objects.filter(is_active=True)
 
     for listing in listings:
-        listing.current_highest = (
-            listing.highest_bid.price if listing.highest_bid else listing.starting_bid
-        )
+        listing.current_highest = get_current_highest(listing)
+        listing.footer = get_footer(listing)
     return render(request, "auctions/index.html", {"listings": listings, "title": "Active Listings"})
 
 def watchlist(request):
@@ -23,9 +22,8 @@ def watchlist(request):
     if is_authenticated:
         user_watchlist = request.user.watchlist.all()  # .all() very important!
         for listing in user_watchlist:
-            listing.current_highest = (
-                listing.highest_bid.price if listing.highest_bid else listing.starting_bid
-            )
+            listing.current_highest = get_current_highest(listing)
+            listing.footer = get_footer(listing)
         return render(request, "auctions/index.html", {"listings": user_watchlist, "title": "Watchlist"})
     else:
         return HttpResponseRedirect(reverse("login"))
@@ -35,10 +33,20 @@ def won_auctions(request):
     if is_authenticated:
         won_auctions = request.user.won_auctions.all()
         for listing in won_auctions:
-            listing.current_highest = (
-                listing.highest_bid.price if listing.highest_bid else listing.starting_bid
-            )
+            listing.current_highest = get_current_highest(listing)
+            listing.footer = get_footer(listing)
         return render(request, "auctions/index.html", {"listings": won_auctions, "title": "Won Auctions"})
+    else:
+        return HttpResponseRedirect(reverse("login"))
+
+def published_listings(request):
+    is_authenticated = request.user.is_authenticated
+    if is_authenticated:
+        published_listings = request.user.published_listings.all()
+        for listing in published_listings:
+            listing.current_highest = get_current_highest(listing)
+            listing.footer = get_footer(listing, "published")
+        return render(request, "auctions/index.html", {"listings": published_listings, "title": "Published Listings"})
     else:
         return HttpResponseRedirect(reverse("login"))
 
