@@ -200,6 +200,17 @@
     </footer>
   </div>
 </article>
+{% if comments %}
+  <section>
+    <ul class="flex flex-col items-center gap-6 mx-auto my-6">
+      {% for comment in comments %}
+      <li class="w-full">
+        {% custom_comment comment.text comment.user comment.created_at %}
+      {% endfor %}
+      </li>
+    </ul>
+  </section>
+{% endif %}
 <script defer>
   const $closeListingButton = document.getElementById('close-listing-button')
   const $popupModal = document.getElementById('popup-modal')

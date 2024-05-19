@@ -1,0 +1,18 @@
+<article class="bg-white border border-gray-200 rounded-lg shadow md:flex-row dark:border-gray-700 dark:bg-gray-800 p-4">
+  <div
+    class="flex items-center mb-4"
+  >
+    <img
+      class="object-cover w-10 h-10 rounded-full me-2"
+      src="{{ author.profile_pic }}"
+      alt="Picture of the comment's author"
+    />
+    <div class="font-medium dark:text-white">
+      <p>{{ author.username }}</p>
+    </div>
+  </div>
+  <p class="mb-2 text-gray-500 dark:text-gray-400">{{ text }}</p>
+  <footer class="mb-5 text-sm text-gray-500 dark:text-gray-400">
+    <p>Commented on <time datetime="{{ date }}">{{ date }}</time></p>
+  </footer>
+</article>

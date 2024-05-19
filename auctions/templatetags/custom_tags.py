@@ -25,6 +25,10 @@ def custom_optional_input(name, type, placeholder, label):
 def custom_error_input(name, type, placeholder, label):
     return {"name": name, "type": type, "placeholder": placeholder, "label": label}
 
+@register.inclusion_tag("auctions/components/comment.html")
+def custom_comment(text, author, date):
+    return {"text": text, "author": author, "date": date}
+
 @register.inclusion_tag("auctions/components/submit-button.html")
 def custom_submit_button(text):
     return {

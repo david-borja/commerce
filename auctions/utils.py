@@ -53,4 +53,7 @@ def get_footer(listing, feed=""):
         if not listing.is_active and not listing.highest_bid:
             return { "string": "Closed with no bids", "pic": None, "alt": None }
     else:
-        return { "string": f"Posted by {listing.author.username}", "pic": listing.author.profile_pic, "alt": "Profile picture of the author" }
+        string = f"Posted by {listing.author.username}"
+        pic = listing.author.profile_pic
+        alt = "Profile picture of the author"
+        return { "string": string, "pic": pic, "alt": alt }

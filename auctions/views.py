@@ -17,6 +17,7 @@ def index(request):
         listing.footer = get_footer(listing)
     return render(request, "auctions/index.html", {"listings": listings, "title": "Active Listings"})
 
+
 def watchlist(request):
     is_authenticated = request.user.is_authenticated
     if is_authenticated:
@@ -27,6 +28,7 @@ def watchlist(request):
         return render(request, "auctions/index.html", {"listings": user_watchlist, "title": "Watchlist"})
     else:
         return HttpResponseRedirect(reverse("login"))
+
 
 def won_auctions(request):
     is_authenticated = request.user.is_authenticated
@@ -39,6 +41,7 @@ def won_auctions(request):
     else:
         return HttpResponseRedirect(reverse("login"))
 
+
 def published_listings(request):
     is_authenticated = request.user.is_authenticated
     if is_authenticated:
@@ -50,10 +53,12 @@ def published_listings(request):
     else:
         return HttpResponseRedirect(reverse("login"))
 
+
 def detail(request, listing_id):
     is_authenticated = request.user.is_authenticated
     # Instance of the Listing model -> dot notation
     listing = Listing.objects.get(pk=listing_id)
+    comments = Listing.objects.get(pk=listing_id).listing_comments.all()
     # user_watchlist = request.user.watchlist.all()  # .all() very important!
     error = None
     if is_authenticated:
@@ -70,7 +75,7 @@ def detail(request, listing_id):
                 error = process_bid(submitted_bid, listing, request)
                 if not error:
                     return HttpResponseRedirect(reverse("detail", args=[listing_id]))
-    params = { "listing": listing, "is_authenticated": is_authenticated, "message": error }
+    params = { "listing": listing, "is_authenticated": is_authenticated, "message": error, "comments": comments }
     return render(request, "auctions/detail.html", params)
 
 
