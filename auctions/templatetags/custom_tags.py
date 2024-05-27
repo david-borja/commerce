@@ -42,13 +42,15 @@ def bookmark_button(is_active, id):
         "id": id,
     }
 
+@register.inclusion_tag("auctions/components/comment-form.html")
+def comment_form(listing_id):
+    return {"listing_id": listing_id}
+
 @register.simple_tag
 def svg_icon(file_name):
-    print(settings.BASE_DIR)
     svg_path = os.path.join(
         settings.BASE_DIR, "auctions/static/icons", file_name + ".svg"
     )
-    print(svg_path)
     with open(svg_path, "r") as file:
         svg_code = file.read()
 

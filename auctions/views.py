@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listing
+from .models import User, Listing, Comments
 from .utils import process_bid, toggle_bookmark, close_listing, get_current_highest, get_footer
 
 
@@ -29,6 +29,14 @@ def watchlist(request):
     else:
         return HttpResponseRedirect(reverse("login"))
 
+def comments(request):
+    if request.method == "POST":
+        listing_id = request.POST["listing_id"]
+        text = request.POST["comment"]
+        listing = Listing.objects.get(pk=listing_id)
+        comment = Comments(text=text, user=request.user, listing=listing)
+        comment.save()
+        return HttpResponseRedirect(reverse("detail", args=[listing_id]))
 
 def won_auctions(request):
     is_authenticated = request.user.is_authenticated

@@ -211,6 +211,9 @@
     </ul>
   </section>
 {% endif %}
+{% if is_authenticated %}
+  {% comment_form listing.id %}
+{% endif %}
 <script defer>
   const $closeListingButton = document.getElementById('close-listing-button')
   const $popupModal = document.getElementById('popup-modal')
