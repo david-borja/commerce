@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from auctions.models import User, Listing, Comments
+from django.utils.text import slugify
+from auctions.models import User, Listing, Comments, Categories
 import json
 import os
 
@@ -19,12 +20,14 @@ def insert_listings(self, data):
             starting_bid = item["starting_bid"]
             image_url = item["image_url"]
             author = User.objects.get_by_natural_key(item["author"])
+            category = Categories.objects.get(name=item["category"])
             listing = Listing(
                 title=title,
                 description=description,
                 starting_bid=starting_bid,
                 image_url=image_url,
                 author=author,
+                category=category,
             )
             listing.save()
             self.stdout.write(self.style.SUCCESS(f"Created lisiting: '{title}'"))
@@ -73,7 +76,25 @@ def insert_comments(self, data):
     except Exception as err:
         self.stdout.write(self.style.ERROR("An error occurred:", err))
 
-integrator_switch = {"users.json": insert_users, "listings.json": insert_listings, "comments.json": insert_comments}
+def insert_categories(self, data):
+    try:
+        for item in data:
+            category = {"name": item["name"], "slug": slugify(item["name"]), "icons": item["icons"]}
+            category = Categories(**category)
+            category.save()
+            self.stdout.write(self.style.SUCCESS(f"Created category: '{item}'"))
+        self.stdout.write(self.style.SUCCESS("CATEGORIES seeding completed."))
+    
+    except Exception as err:
+        self.stdout.write(self.style.ERROR("An error occurred:", err))
+
+
+integrator_switch = {
+    "users.json": insert_users,
+    "categories.json": insert_categories,
+    "listings.json": insert_listings,
+    "comments.json": insert_comments
+}
 
 
 class Command(BaseCommand):
@@ -84,7 +105,7 @@ class Command(BaseCommand):
         script_dir = os.path.dirname(os.path.abspath(__file__))
         # Construct the path to the JSON file
         seed_data_dir = os.path.join(script_dir, "../seed_data")
-        data_file_names = ["users.json", "listings.json", "comments.json"] # os.listdir(seed_data_dir)
+        data_file_names = ["users.json", "categories.json", "listings.json", "comments.json"] # os.listdir(seed_data_dir)
         for data_file_name in data_file_names:
             if data_file_name not in integrator_switch:
                 raise Exception(f"{data_file_name} file doesn't belong to seed data")

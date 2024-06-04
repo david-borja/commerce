@@ -4,76 +4,87 @@
     "description": "This iconic Iron Man helmet was worn by none other than me, Tony Stark. After saving the world once again, I've decided to retire and put my suit on display for fans to admire. Don't miss this chance to own a piece of Avengers history!",
     "starting_bid": "1000",
     "image_url": "https://thegreytechnologies.com/cdn/shop/files/iron-man-helmet-5_2000x.webp?v=1700467275",
-    "author": "Iron Man"
+    "author": "Iron Man",
+    "category": "Wearables"
   },
   {
     "title": "Gauntlet",
     "description": "I'm offering up the mighty gauntlet that once adorned my hand during my quest for dominance. I realized the dangers of such power and decided it was best to part ways. Now, it's your chance to wield this artifact and feel the immense power it holds.",
     "starting_bid": "500",
     "image_url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSq59nxSQ8hv3dKpqR98WZItyTUiZbD0qbmUvj-OmECRE3Akz8LpugzgtNuOjU84Quobb72ww4hO8JbvvEjTrR86W4s77Pj5lIgCiskZFvmXWdI_ILuPLGcGg&usqp=CAE",
-    "author": "Thanos"
+    "author": "Thanos",
+    "category": "Wearables"
   },
   {
     "title": "Physics books",
     "description": "Hey, it's your friendly neighborhood Spider-Man here! These physics books were part of my collection during my time at Midtown High. Being a superhero doesn't leave much time for studying. So, I'm selling them to fund my next scientific experiment.",
     "starting_bid": "60",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl5Qpyh1zGSU-vcAWcoHrO0oc9jSJn0S0m9Q&usqp=CAU",
-    "author": "Spider Man"
+    "author": "Spider Man",
+    "category": "Books"
   },
   {
     "title": "Hammer",
     "description": "My legendary hammer, Mjolnir, is now up for grabs. After countless battles against the forces of evil, I've decided to retire and focus on new endeavors. This is your chance to wield the power of the God of Thunder. Are you worthy?",
     "starting_bid": "30000",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQa2M8AQQ0Oqjwy9pU9k8on8xAHRyZ86kiyUeq7I54ETdHmVSGnY7tbm1R8SsRc0TpR2Pc&usqp=CAU",
-    "author": "Thor"
+    "author": "Thor",
+    "category": "Weapons"
   },
   {
     "title": "Infinity Stones",
     "description": "I'm parting ways with these Infinity Stones that I once sought after to bend the universe to my will. I've decided to relinquish them in hopes that someone more responsible will take custody. Will you be the one to possess the ultimate power?",
     "starting_bid": "9999999999999",
     "image_url": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQfHgcNkgAAE-TGvJwTXfGY0dmNzKyePcST8N0EXbMmdO4FwzBFD-asCSRtcDRG9Qx1yOEHLrZO1JLFdeurpvna9oCjbMO_MH-XfwpNZCuEavitdE0jySUR&usqp=CAE",
-    "author": "Thanos"
+    "author": "Thanos",
+    "category": "Collectibles"
   },
   {
     "title": "Broken Shield",
     "description": "My iconic shield, bearing the scars of countless battles, is now available for purchase. After passing the mantle to a new Captain America, this shield has been retired as a symbol of the heroics of the past. Own a piece of Avengers history.",
     "starting_bid": "70",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbh3Pv0dzH68ehxtI7029avgtV7jsboe1_QQ&usqp=CAU",
-    "author": "Captain America"
+    "author": "Captain America",
+    "category": "Weapons"
   },
   {
     "title": "Stingers",
     "description": "I'm parting ways with my trusty stingers. These weapons have helped me out of countless tight spots, but it's time for me to move on to new gear. Perfect for any aspiring spy or Avenger in training. Don't miss out on this opportunity!",
     "starting_bid": "800",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4QV9zUbpsJb0fEmIK6luReFURi9hlHkWgkQ&usqp=CAU",
-    "author": "Black Widow"
+    "author": "Black Widow",
+    "category": "Wearables"
   },
   {
     "title": "Bow",
     "description": "I'm selling my trusty bow to make room for a newer model. This bow has been with me through thick and thin, helping me take down enemies from afar. Whether you're a seasoned marksman or just starting out, this bow won't let you down.",
     "starting_bid": "1000",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEhHUTbM__xwlpEkHNsGUOAWtz4HTONlLWdA&usqp=CAU",
-    "author": "Hawkeye"
+    "author": "Hawkeye",
+    "category": "Weapons"
   },
   {
     "title": "Purple Pants",
     "description": "Believe it or not, I'm selling my old pants. They may not look like much, but they've survived countless transformations into the green fighting machine you know. Perfect for any collector or gamma radiation scientist. Don't make me angry, bid now!",
     "starting_bid": "500",
     "image_url": "https://contents.mediadecathlon.com/p2516606/k$549037d3267e40675dbc05d63ef7f611/sq/pantalon-corto-futbol-viralto-violeta.jpg?f=3000x3000",
-    "author": "The Hulk"
+    "author": "The Hulk",
+    "category": "Clothing"
   },
   {
     "title": "Arc Reactor",
     "description": "Greetings, fellow techies! Tony Stark here. I'm selling one of my spare arc reactors. This compact and powerful energy source has powered my suits through many battles. Whether you're a collector or an engineer, this arc reactor is sure to impress.",
     "starting_bid": "3000",
     "image_url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWcIZ2tpRS4h4IVGgR7jw6QwjSn8_BiO7A2Q&usqp=CAU",
-    "author": "Iron Man"
+    "author": "Iron Man",
+    "category": "Electronics"
   },
   {
     "title": "Uniform",
     "description": "I'm offering up my iconic uniform for sale. After years of service, I've decided to hang up the suit and retire. This uniform has seen its fair share of battles and is a true symbol of patriotism. Own a piece of Avengers history today!",
     "starting_bid": "2000",
     "image_url": "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/4/40/Cap%27s_Uniform.png/revision/latest?cb=20141214075735",
-    "author": "Captain America"
+    "author": "Captain America",
+    "category": "Clothing"
   }
 ]

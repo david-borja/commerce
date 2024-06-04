@@ -1,0 +1,8 @@
+[
+    { "name": "Weapons", "icons": "⚔️🛡" },
+    { "name": "Clothing", "icons": "👕👖" },
+    { "name": "Electronics", "icons": "📱📷" },
+    { "name": "Books", "icons": "📚📖" },
+    { "name": "Wearables", "icons": "⌚️🕶" },
+    { "name": "Collectibles", "icons": "🖼️💎" }
+]

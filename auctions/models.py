@@ -22,7 +22,13 @@ class Listing(models.Model):
         related_name="lisitings_won",
     )  # string references ( "Bid" ) can be use for referencing models that are defined below
     image_url = models.CharField(max_length=256, blank=True)
-    category = models.CharField(max_length=64, blank=True)
+    category = models.ForeignKey(
+        "Categories",
+        on_delete=models.CASCADE,
+        related_name="category",
+        blank=True,
+        null=True,
+    )
     is_active = models.BooleanField(default=True)
     saved_by = models.ManyToManyField(User, blank=True, related_name="watchlist")
     winner = models.ForeignKey(
@@ -75,3 +81,5 @@ class Comments(models.Model):
 class Categories(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=64)
+    slug = models.SlugField(max_length=64, unique=True, default="")
+    icons = models.CharField(max_length=64, blank=True)

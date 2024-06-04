@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listing, Comments
+from .models import User, Listing, Comments, Categories
 from .utils import process_bid, toggle_bookmark, close_listing, get_current_highest, get_footer
 
 
@@ -12,11 +12,24 @@ def index(request):
     # it returns a queryset containing all the objects (instances) of the Listing model
     listings = Listing.objects.filter(is_active=True)
 
-    for listing in listings:
+    for listing in listings: # todo: refactor this to a function
         listing.current_highest = get_current_highest(listing)
         listing.footer = get_footer(listing)
     return render(request, "auctions/index.html", {"listings": listings, "title": "Active Listings"})
 
+
+def categories(request):
+    categories = Categories.objects.all()
+    return render(request, "auctions/categories.html", {"categories": categories})
+
+def category(request, slug):
+    category = Categories.objects.get(slug=slug)
+    category_listings = Listing.objects.filter(category=category, is_active=True)
+    for listing in category_listings:
+        listing.current_highest = get_current_highest(listing)
+        listing.footer = get_footer(listing)
+
+    return render(request, "auctions/index.html", {"listings": category_listings, "title": f"{category.name} {category.icons}"})
 
 def watchlist(request):
     is_authenticated = request.user.is_authenticated
