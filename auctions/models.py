@@ -83,3 +83,5 @@ class Category(models.Model):
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64, unique=True, default="")
     icons = models.CharField(max_length=64, blank=True)
+    class Meta:
+        verbose_name_plural = "categories"
