@@ -23,7 +23,7 @@ class Listing(models.Model):
     )  # string references ( "Bid" ) can be use for referencing models that are defined below
     image_url = models.CharField(max_length=256, blank=True)
     category = models.ForeignKey(
-        "Categories",
+        "Category",
         on_delete=models.CASCADE,
         related_name="category",
         blank=True,
@@ -61,8 +61,8 @@ class Bid(models.Model):
         return f"{self.id}: {self.user} offered {self.price} for {self.listing}"
 
 
-# Comments
-class Comments(models.Model):
+# Comment
+class Comment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     text = models.CharField(max_length=128)
     user = models.ForeignKey(
@@ -77,8 +77,8 @@ class Comments(models.Model):
         return f'{self.id}: {self.user} commented "{self.text}" on {self.listing}'
 
 
-# Categories
-class Categories(models.Model):
+# Category
+class Category(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=64)
     slug = models.SlugField(max_length=64, unique=True, default="")

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib import admin
-from .models import Bid, Listing, User, Comments, Categories
+from .models import Bid, Listing, User, Comment, Category
 
 
 class BidAdmin(admin.ModelAdmin):
@@ -58,16 +58,16 @@ class UserAdmin(admin.ModelAdmin):
     filter_horizontal = ("watchlist",)
 
 
-class CommentsAdmin(admin.ModelAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ("id", "text", "user", "listing", "created_at")
 
 
-class CategoriesAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
 
 
 admin.site.register(Bid, BidAdmin)
 admin.site.register(Listing, ListingAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(Comments, CommentsAdmin)
-admin.site.register(Categories, CategoriesAdmin)
+admin.site.register(Comment, CommentAdmin)
+admin.site.register(Category, CategoryAdmin)

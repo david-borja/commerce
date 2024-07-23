@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
-from .models import User, Listing, Comments, Categories
+from .models import User, Listing, Comment, Category
 from .utils import process_bid, toggle_bookmark, close_listing, get_current_highest, get_footer
 
 
@@ -20,12 +20,12 @@ def index(request):
 
 
 def categories(request):
-    categories = Categories.objects.all()
+    categories = Category.objects.all()
     return render(request, "auctions/categories.html", {"categories": categories})
 
 
 def category(request, slug):
-    category = Categories.objects.get(slug=slug)
+    category = Category.objects.get(slug=slug)
     category_listings = Listing.objects.filter(category=category, is_active=True)
     for listing in category_listings:
         listing.current_highest = get_current_highest(listing)
@@ -48,7 +48,7 @@ def comments(request):
         listing_id = request.POST["listing_id"]
         text = request.POST["comment"]
         listing = Listing.objects.get(pk=listing_id)
-        comment = Comments(text=text, user=request.user, listing=listing)
+        comment = Comment(text=text, user=request.user, listing=listing)
         comment.save()
         return HttpResponseRedirect(reverse("detail", args=[listing_id]))
 
