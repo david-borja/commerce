@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -22,26 +23,26 @@ def categories(request):
     categories = Categories.objects.all()
     return render(request, "auctions/categories.html", {"categories": categories})
 
+
 def category(request, slug):
     category = Categories.objects.get(slug=slug)
     category_listings = Listing.objects.filter(category=category, is_active=True)
     for listing in category_listings:
         listing.current_highest = get_current_highest(listing)
         listing.footer = get_footer(listing)
-
     return render(request, "auctions/index.html", {"listings": category_listings, "title": f"{category.name} {category.icons}"})
 
-def watchlist(request):
-    is_authenticated = request.user.is_authenticated
-    if is_authenticated:
-        user_watchlist = request.user.watchlist.all()  # .all() very important!
-        for listing in user_watchlist:
-            listing.current_highest = get_current_highest(listing)
-            listing.footer = get_footer(listing)
-        return render(request, "auctions/index.html", {"listings": user_watchlist, "title": "Watchlist"})
-    else:
-        return HttpResponseRedirect(reverse("login"))
 
+@login_required()
+def watchlist(request):
+    user_watchlist = request.user.watchlist.all()  # .all() very important!
+    for listing in user_watchlist:
+        listing.current_highest = get_current_highest(listing)
+        listing.footer = get_footer(listing)
+    return render(request, "auctions/index.html", {"listings": user_watchlist, "title": "Watchlist"})
+
+
+@login_required()
 def comments(request):
     if request.method == "POST":
         listing_id = request.POST["listing_id"]
@@ -51,28 +52,23 @@ def comments(request):
         comment.save()
         return HttpResponseRedirect(reverse("detail", args=[listing_id]))
 
+
+@login_required()
 def won_auctions(request):
-    is_authenticated = request.user.is_authenticated
-    if is_authenticated:
-        won_auctions = request.user.won_auctions.all()
-        for listing in won_auctions:
-            listing.current_highest = get_current_highest(listing)
-            listing.footer = get_footer(listing)
-        return render(request, "auctions/index.html", {"listings": won_auctions, "title": "Won Auctions"})
-    else:
-        return HttpResponseRedirect(reverse("login"))
+    won_auctions = request.user.won_auctions.all()
+    for listing in won_auctions:
+        listing.current_highest = get_current_highest(listing)
+        listing.footer = get_footer(listing)
+    return render(request, "auctions/index.html", {"listings": won_auctions, "title": "Won Auctions"})
 
 
+@login_required()
 def published_listings(request):
-    is_authenticated = request.user.is_authenticated
-    if is_authenticated:
-        published_listings = request.user.published_listings.all()
-        for listing in published_listings:
-            listing.current_highest = get_current_highest(listing)
-            listing.footer = get_footer(listing, "published")
-        return render(request, "auctions/index.html", {"listings": published_listings, "title": "Published Listings"})
-    else:
-        return HttpResponseRedirect(reverse("login"))
+    published_listings = request.user.published_listings.all()
+    for listing in published_listings:
+        listing.current_highest = get_current_highest(listing)
+        listing.footer = get_footer(listing, "published")
+    return render(request, "auctions/index.html", {"listings": published_listings, "title": "Published Listings"})
 
 
 def detail(request, listing_id):
@@ -155,23 +151,21 @@ def register(request):
         return render(request, "auctions/register.html")
 
 
+@login_required()
 def create(request):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            title = request.POST["title"]
-            description = request.POST["description"]
-            starting_bid = request.POST["starting_bid"]
-            author = request.user
-            listing = Listing(
-                title=title,
-                description=description,
-                starting_bid=starting_bid,
-                author=author,
-            )
-            listing.save()
+    if request.method == "POST":
+        title = request.POST["title"]
+        description = request.POST["description"]
+        starting_bid = request.POST["starting_bid"]
+        author = request.user
+        listing = Listing(
+            title=title,
+            description=description,
+            starting_bid=starting_bid,
+            author=author,
+        )
+        listing.save()
 
-            return HttpResponseRedirect(reverse("index"))
-        else:
-            return render(request, "auctions/create.html")
+        return HttpResponseRedirect(reverse("index"))
     else:
-        return HttpResponseRedirect(reverse("login"))
+        return render(request, "auctions/create.html")
