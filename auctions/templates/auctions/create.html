@@ -2,7 +2,7 @@
 {% block body %}
 {% load custom_tags %}
 
-<h2 class="text-xl">Create Listing</h2>
+<h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Create Listing</h2>
 <form action="{% url 'create' %}" method="post" class="max-w-md mx-auto my-6">
   {% csrf_token %}
   <div class="mb-6">
