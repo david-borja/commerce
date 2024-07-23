@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from django.utils.text import slugify
-from auctions.models import User, Listing, Comments, Categories
+from auctions.models import User, Listing, Comment, Category
 import json
 import os
 
@@ -20,7 +20,7 @@ def insert_listings(self, data):
             starting_bid = item["starting_bid"]
             image_url = item["image_url"]
             author = User.objects.get_by_natural_key(item["author"])
-            category = Categories.objects.get(name=item["category"])
+            category = Category.objects.get(name=item["category"])
             listing = Listing(
                 title=title,
                 description=description,
@@ -68,7 +68,7 @@ def insert_comments(self, data):
             text = item["text"]
             user = User.objects.get(username=item["author"]) # or get_by_natural_key(item["author"])
             listing = Listing.objects.get(title=item["listing"])
-            comment = Comments(text=text, user=user, listing=listing)
+            comment = Comment(text=text, user=user, listing=listing)
             comment.save()
             self.stdout.write(self.style.SUCCESS(f"Created comment: '{text}'"))
 
@@ -80,7 +80,7 @@ def insert_categories(self, data):
     try:
         for item in data:
             category = {"name": item["name"], "slug": slugify(item["name"]), "icons": item["icons"]}
-            category = Categories(**category)
+            category = Category(**category)
             category.save()
             self.stdout.write(self.style.SUCCESS(f"Created category: '{item}'"))
         self.stdout.write(self.style.SUCCESS("CATEGORIES seeding completed."))
