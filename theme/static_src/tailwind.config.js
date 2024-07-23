@@ -43,7 +43,11 @@ module.exports = {
         // '../../**/*.py'
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                avengeance: ["Avengeance", "cursive"]
+            }
+        },
     },
     plugins: [
         /**

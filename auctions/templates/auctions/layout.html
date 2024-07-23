@@ -6,6 +6,12 @@
   <head>
     <title>{% block title %}Auctions{% endblock %}</title>
     {% tailwind_css %}
+    <style>
+      @font-face {
+        font-family: Avengeance;
+        src: url('{% static "fonts/avengeance.ttf" %}') format('truetype');
+      }
+    </style>
     <script>
       // On page load or when changing themes, best to add inline in `head` to avoid FOUC
       if (
@@ -19,7 +25,7 @@
       }
     </script>
   </head>
-  <body class="p-3 dark:bg-gray-900 max-w-4xl mx-auto">
+  <body class="max-w-4xl p-3 mx-auto dark:bg-gray-900">
     <!-- NAVBAR -->
     {% include 'auctions/components/navbar.html' %}
     {% block body %} {% endblock %}
