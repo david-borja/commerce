@@ -1,5 +1,11 @@
 # README
 
+## Get Started
+
+python3 manage.py seed_db
+python3 manage.py runserver
+python3 manage.py tailwind start
+
 ## Django Models
 
 <https://cs50.harvard.edu/web/2020/notes/4/#django-models>
