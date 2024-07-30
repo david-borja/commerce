@@ -157,10 +157,15 @@ def create(request):
         title = request.POST["title"]
         description = request.POST["description"]
         starting_bid = request.POST["starting_bid"]
+        category_slug = request.POST["category"]
+        image_url = request.POST["image_url"]
         author = request.user
+
         listing = Listing(
             title=title,
             description=description,
+            category=Category.objects.get(slug=category_slug) if category_slug else None,
+            image_url=image_url or None,
             starting_bid=starting_bid,
             author=author,
         )
@@ -168,4 +173,5 @@ def create(request):
 
         return HttpResponseRedirect(reverse("index"))
     else:
-        return render(request, "auctions/create.html")
+        categories = Category.objects.all()
+        return render(request, "auctions/create.html", { "categories": categories })

@@ -21,7 +21,7 @@ class Listing(models.Model):
         on_delete=models.CASCADE,
         related_name="lisitings_won",
     )  # string references ( "Bid" ) can be use for referencing models that are defined below
-    image_url = models.CharField(max_length=256, blank=True)
+    image_url = models.CharField(max_length=256, blank=True, null=True)
     category = models.ForeignKey(
         "Category",
         on_delete=models.CASCADE,

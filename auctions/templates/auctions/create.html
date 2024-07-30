@@ -9,16 +9,31 @@
     {% custom_input 'title' 'text' 'Title' 'Product title' %}
   </div>
   <div class="mb-6">
-    {% custom_input 'description' 'text' 'Description' 'Product description' %}
+      <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product description</label>
+      <textarea
+        name="description"
+        id="description"
+        rows="4"
+        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-50 min-h-[100px]"
+        style="resize: none; field-sizing: content;"
+        placeholder="Write a product description"
+        required
+      ></textarea>
   </div>
   <div class="mb-6">
     {% custom_input 'starting_bid' 'number' '100' 'Product starting bid' %}
   </div>
   <div class="mb-6">
-    {% custom_optional_input 'image' 'file' 'Image' 'Product image' %}
+    {% custom_optional_input 'image_url' 'text' 'https://mock_image_hub.com/image_id_1' 'Product image url' %}
   </div>
   <div class="mb-6">
-    {% custom_optional_input 'category' 'text' 'Category' 'Product category' %}
+  <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select a category</label>
+  <select id="categories" name="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option selected value="">Choose a category</option>
+    {% for category in categories %}
+      <option value="{{ category.slug }}">{{ ''|add:category.icons|add:category.name }}</option>
+    {% endfor %}
+  </select>
   </div>
   {% custom_submit_button 'Submit' %}
 </form>
