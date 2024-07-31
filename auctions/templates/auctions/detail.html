@@ -1,5 +1,5 @@
 {% extends "auctions/layout.html" %} {% block body %} {% load custom_tags %}
-<div class="flex items-center gap-2 w-fit">
+<div class="flex items-center w-full gap-2">
   <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
     {{ listing.title }}
   </h2>
@@ -8,8 +8,15 @@
   {% else %}
     {% custom_badge False 'Closed' %}
   {% endif %}
+
   {% if is_authenticated %}
     {% bookmark_button listing.is_saved_by_user listing.id %}
+  {% endif %}
+
+  {% if listing.category %}
+  <a
+  href="{% url 'category' listing.category.slug %}"
+  class="ml-auto text-gray-900 dark:text-white"><h3>{{ ''|add:listing.category.icons|add:' '|add:listing.category.name }}</h3></a>
   {% endif %}
 </div>
 {% if message %}
