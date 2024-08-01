@@ -36,9 +36,13 @@
         {{ listing.highest_bid.price|currency }}
       </span>
       <div class="flex items-center justify-end gap-2 mt-4">
-        <span class="text-gray-900 dark:text-white"
-          >Bid by {{ listing.highest_bid.user.username }}</span
-        >
+        <span class="text-gray-900 dark:text-white">
+          {% if listing.winner %}
+            Won by {{ listing.winner.username }}
+          {% else %}
+            Bid by {{ listing.highest_bid.user.username }}
+          {% endif %}
+        </span>
         <img
           class="object-cover w-10 h-10 rounded-full"
           src="{{ listing.highest_bid.user.profile_pic }}"
