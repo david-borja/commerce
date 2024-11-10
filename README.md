@@ -2,9 +2,9 @@
 
 ## Get Started
 
-python3 manage.py seed_db
-python3 manage.py runserver
-python3 manage.py tailwind start
+- python3 manage.py seed_db
+- python3 manage.py runserver
+- python3 manage.py tailwind start
 
 ## Django Models
 
