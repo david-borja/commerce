@@ -26,6 +26,8 @@ python3 manage.py tailwind start
 
 django-admin startproject project_name
 
+or python3 -m django startproject project_name
+
 ## Create a Django app
 
 python3 manage.py startapp app_name
