@@ -1,5 +1,8 @@
 # README
 
+## App walkthrough
+https://www.youtube.com/watch?v=GtnbB7LLTbM
+
 ## Get Started
 
 - python3 manage.py seed_db
