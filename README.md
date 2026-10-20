@@ -1,7 +1,9 @@
 # README
 
-## App walkthrough
-https://www.youtube.com/watch?v=GtnbB7LLTbM
+## Video app walkthrough
+<a href='https://www.youtube.com/watch?v=GtnbB7LLTbM' target='_blank'>
+  <img width='50%' src='https://i9.ytimg.com/vi_webp/GtnbB7LLTbM/mqdefault.webp?v=6ad7efc8&sqp=COzd39YG&rs=AOn4CLAlrzAiYubZUFW9YfYIMZoDGKlUhg' alt='Mostrando la app de subastas' />
+</a>
 
 ## Get Started
 
