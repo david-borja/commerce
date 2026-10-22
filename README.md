@@ -1,11 +1,8 @@
 # README
 
 ## Video App Walkthrough
+[![Ver vídeo demostración de la app de subastas](https://i.ytimg.com/vi/GtnbB7LLTbM/hqdefault.jpg)](https://youtu.be/GtnbB7LLTbM)
 
-<a href='https://www.youtube.com/watch?v=GtnbB7LLTbM' style="display: block; text-align: center;" target='_blank'>
-  <img width='50%' src='https://i9.ytimg.com/vi_webp/GtnbB7LLTbM/mqdefault.webp?v=6ad7f5e2&sqp=CNzx6NYG&rs=AOn4CLBDKSn2s2mEvisvQKet82N24_LpeA' alt='Video demostración app de subastas' />
-</a>
-  
 ## Get Started
 
 - python3 manage.py seed_db
