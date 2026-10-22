@@ -3,7 +3,7 @@
 ## Video App Walkthrough
 
 <a href='https://www.youtube.com/watch?v=GtnbB7LLTbM' style="display: block; text-align: center;" target='_blank'>
-  <img width='50%' src='https://i9.ytimg.com/vi_webp/GtnbB7LLTbM/mqdefault.webp?v=6ad7f5e2&sqp=CMjp39YG&rs=AOn4CLBVA05JeFS9ptTzBrX2Y4XWmguUPg' alt='Video demostración app de subastas' />
+  <img width='50%' src='https://i9.ytimg.com/vi_webp/GtnbB7LLTbM/mqdefault.webp?v=6ad7f5e2&sqp=CNzx6NYG&rs=AOn4CLBDKSn2s2mEvisvQKet82N24_LpeA' alt='Video demostración app de subastas' />
 </a>
   
 ## Get Started
